@@ -19,3 +19,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/carousels', [CarouselItemsController::class, 'index']);
+Route::get('/carousels/{id}', [CarouselItemsController::class, 'show']);

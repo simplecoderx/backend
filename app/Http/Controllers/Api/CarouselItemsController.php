@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\CarouselItems; //import the mode, importing base on file
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CarouselItemsRequest;
+use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 
 class CarouselItemsController extends Controller
@@ -20,9 +22,22 @@ class CarouselItemsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CarouselItemsRequest $request)
     {
-        //
+        // Retrieve the validated input data...
+        $validated = $request->validated();
+
+        $carouselItem = CarouselItems::create($validated
+            // [
+            // 'carousel_name'=> $request->carousel_name, 
+            // 'image_path'=> $request->image_path,
+            // 'description'=> $request->description,
+            //  'user_id'=> $request->user_id,
+            
+        // ]
+    );
+
+        return $carouselItem;
     }
 
     /**
@@ -40,7 +55,7 @@ class CarouselItemsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
     }
 
     /**

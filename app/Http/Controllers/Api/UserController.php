@@ -83,7 +83,7 @@ class UserController extends Controller
 
         $validated = $request->validated();
  
-        //$user->email == this email here indicates the column table
+        //$user->password == this password here indicates the column table
         $user->password = Hash::make($validated['password']);
  
         $user->save();

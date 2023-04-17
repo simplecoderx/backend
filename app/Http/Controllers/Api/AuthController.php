@@ -36,9 +36,14 @@ class AuthController extends Controller
             /**
      * Display the specified resource.
      */
-    public function logout(UserRequest $id)
+    public function logout(Request $request)
     {
-        // return CarouselItems::find($id); 
-        return false;
+        $request->user()->tokens()->delete();
+
+        $response = [
+            'message'   => 'Logout.'
+        ];
+
+        return $response;
     }
 }

@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\UserResourceController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\MessagesController;
+use App\Http\Controllers\Api\ProfileController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -46,10 +47,15 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::put('/user/{id}',            'update')->name('user.update');
         Route::put('/user/email/{id}',      'email')->name('user.email');
         Route::put('/user/password/{id}',   'password')->name('user.password');
+        Route::put('/user/image/{id}',   'image')->name('user.image');
         Route::delete('/user/{id}',         'destroy');
     });
-});
 
+    //User Specific API's
+        Route::get('/profile/show', [ProfileController::class, 'show']);
+        Route::put('/profile/image', [ProfileController::class, 'image'])->name('profile.image');
+});
+ 
 // Route::controller(CarouselItemsController::class)->group(function () {
 //     Route::get('/carousel',             'index');
 //     Route::get('/carousel/{id}',        'show');
@@ -77,3 +83,5 @@ Route::middleware(['auth:sanctum'])->group(function () {
 Route::get('/message', [MessagesController::class, 'index']);
 Route::post('/message', [MessagesController::class, 'store']);
 Route::put('/message/{id}', [MessagesController::class, 'update']);
+
+

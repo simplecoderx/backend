@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\MessagesController;
 use App\Http\Controllers\Api\ProfileController;
+use App\Http\Controllers\Api\AiController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -29,6 +30,9 @@ use App\Http\Controllers\Api\ProfileController;
 
 Route::post('/login', [AuthController::class, 'login'])->name('user.login');
 Route::post('/user', [UserController::class, 'store'])->name('user.store');
+
+// OCR API
+Route::post('/ocr', [AiController::class, 'ocr'])->name('ocr.image');
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);

@@ -9,6 +9,9 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\MessagesController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\AiController;
+use App\Http\Controllers\Api\PromptsController;
+use App\Http\Controllers\Api\TranslateController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -59,6 +62,20 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('/profile/show', [ProfileController::class, 'show']);
         Route::put('/profile/image', [ProfileController::class, 'image'])->name('profile.image');
 });
+
+Route::controller(PromptsController::class)->group(function () {
+    Route::get('/prompts',              'index');
+    Route::get('/prompts/{id}',         'show');
+    Route::post('/prompt',              'prompts')->name('user.prompt');
+    Route::delete('/prompts/{id}',      'destroy');
+});
+
+Route::controller(TranslateController::class)->group(function () {
+    Route::get('/transprompts',              'index');
+    Route::get('/transprompts/{id}',         'show');
+    Route::post('/transprompt',              'storetransprompt')->name('user.storetransprompt');
+    Route::delete('/transprompts/{id}',      'destroy');
+});
  
 // Route::controller(CarouselItemsController::class)->group(function () {
 //     Route::get('/carousel',             'index');
@@ -87,5 +104,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 Route::get('/message', [MessagesController::class, 'index']);
 Route::post('/message', [MessagesController::class, 'store']);
 Route::put('/message/{id}', [MessagesController::class, 'update']);
+
+// Route::get('/prompts', [PromptsController::class, 'index']);
 
 

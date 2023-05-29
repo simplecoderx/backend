@@ -31,14 +31,32 @@ use App\Http\Controllers\Api\TranslateController;
 //     Route::post('/logout', 'logout');
 // });
 
+//PUBLIC API
 Route::post('/login', [AuthController::class, 'login'])->name('user.login');
 Route::post('/user', [UserController::class, 'store'])->name('user.store');
+
+
+
+Route::controller(TranslateController::class)->group(function () {
+    Route::get('/transprompts',              'index');
+    Route::get('/transprompts/{id}',         'show');
+    Route::post('/transprompt',              'storetransprompt')->name('user.storetransprompt');
+    Route::delete('/transprompts/{id}',      'destroy');
+});
 
 // OCR API
 Route::post('/ocr', [AiController::class, 'ocr'])->name('ocr.image');
 
+
+//AUTHENTICATED API
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
+    Route::controller(PromptsController::class)->group(function () {
+        Route::get('/prompts',              'index');
+        Route::get('/prompts/{id}',         'show');
+        Route::post('/prompt',              'prompts')->name('user.prompt');
+        Route::delete('/prompts/{id}',      'destroy');
+    });
 
     Route::controller(CarouselItemsController::class)->group(function () {
         Route::get('/carousels',             'index');
@@ -63,20 +81,11 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::put('/profile/image', [ProfileController::class, 'image'])->name('profile.image');
 });
 
-Route::controller(PromptsController::class)->group(function () {
-    Route::get('/prompts',              'index');
-    Route::get('/prompts/{id}',         'show');
-    Route::post('/prompt',              'prompts')->name('user.prompt');
-    Route::delete('/prompts/{id}',      'destroy');
-});
+Route::get('/message', [MessagesController::class, 'index']);
+Route::post('/message', [MessagesController::class, 'store']);
+Route::put('/message/{id}', [MessagesController::class, 'update']);
 
-Route::controller(TranslateController::class)->group(function () {
-    Route::get('/transprompts',              'index');
-    Route::get('/transprompts/{id}',         'show');
-    Route::post('/transprompt',              'storetransprompt')->name('user.storetransprompt');
-    Route::delete('/transprompts/{id}',      'destroy');
-});
- 
+// Route::get('/prompts', [PromptsController::class, 'index']);
 // Route::controller(CarouselItemsController::class)->group(function () {
 //     Route::get('/carousel',             'index');
 //     Route::get('/carousel/{id}',        'show');
@@ -101,10 +110,5 @@ Route::controller(TranslateController::class)->group(function () {
 // Route::put('/user/email/{id}', [UserController::class, 'email'])->name('user.email');
 // Route::put('/user/password/{id}', [UserController::class, 'password'])->name('user.password');
 
-Route::get('/message', [MessagesController::class, 'index']);
-Route::post('/message', [MessagesController::class, 'store']);
-Route::put('/message/{id}', [MessagesController::class, 'update']);
-
-// Route::get('/prompts', [PromptsController::class, 'index']);
 
 

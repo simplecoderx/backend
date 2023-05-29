@@ -48,13 +48,13 @@ class UserRequest extends FormRequest
             return [
                 'image' => 'required|image|mimes:jpg,bmp,png|max:2048',
             ];
-        } else if (request()->routeIs('user.prompt') ) {
+        } else if (request()->routeIs('user.prompt')) {
             return [
                 'tools_type' => 'required|string',
                 'text' => 'required|string',
                 'result' => 'nullable|string'
             ];
-        }else if (request()->routeIs('user.storetransprompt') ) {
+        } else if (request()->routeIs('user.storetransprompt')) {
             return [
                 'text' => 'required|string',
                 'result' => 'nullable|string'

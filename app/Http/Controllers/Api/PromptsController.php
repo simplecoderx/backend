@@ -19,17 +19,6 @@ class PromptsController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    /**
      * Store a newly created resource in storage.
      */
     public function prompts(UserRequest $request)
@@ -50,22 +39,6 @@ class PromptsController extends Controller
         );
 
         return $prompt;
-        // dd('prompts method called');
-        // $validated = $request->validate([
-        //     'text' => 'required|string',
-        //     'result' => 'required|string',
-        //     'tools_type' => 'required|string',
-        // ]);
-        // dd('input validated');
-        // $openAiResult = new Prompt;
-        // $openAiResult->text = $validated['text'];
-        // $openAiResult->result = $validated['result'];
-        // $openAiResult->tools_type = $validated['tools_type'];
-        // $openAiResult->save();
-    
-        // return response()->json(['message' => 'OpenAI result stored successfully'], 201);
-
-
     }
 
     /**
@@ -76,23 +49,6 @@ class PromptsController extends Controller
         // return CarouselItems::find($id); 
         return Prompt::findOrFail($id);
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
     /**
      * Remove the specified resource from storage.
      */

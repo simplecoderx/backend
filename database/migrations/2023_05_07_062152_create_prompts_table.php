@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('tools_type');
             $table->string('text');
             $table->string('result')->require();
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            // $table->unsignedBigInteger('user_id');
+            // $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

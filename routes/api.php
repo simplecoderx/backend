@@ -35,7 +35,12 @@ use App\Http\Controllers\Api\TranslateController;
 Route::post('/login', [AuthController::class, 'login'])->name('user.login');
 Route::post('/user', [UserController::class, 'store'])->name('user.store');
 
-
+// Route::controller(PromptsController::class)->group(function () {
+//     Route::get('/prompts',              'index');
+//     Route::get('/prompts/{id}',         'show');
+//     Route::post('/prompts',              'prompts')->name('user.prompt');
+//     Route::delete('/prompts/{id}',      'destroy');
+// });
 
 Route::controller(TranslateController::class)->group(function () {
     Route::get('/transprompts',              'index');
@@ -51,10 +56,11 @@ Route::post('/ocr', [AiController::class, 'ocr'])->name('ocr.image');
 //AUTHENTICATED API
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
+    
     Route::controller(PromptsController::class)->group(function () {
         Route::get('/prompts',              'index');
         Route::get('/prompts/{id}',         'show');
-        Route::post('/prompt',              'prompts')->name('user.prompt');
+        Route::post('/prompts',              'prompts')->name('user.prompt');
         Route::delete('/prompts/{id}',      'destroy');
     });
 
